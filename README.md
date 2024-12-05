@@ -1,7 +1,7 @@
 # SPAmix
 A scalable, accurate, and universal analysis framework using individual-level allele frequency for large-scale genetic association studies in an admixed population
 
-Please do not hesitate to contact me (yuzhuoma@stu.pku.edu.cn) if you are interested in SPAmix+ or other retrospective saddlepoint approximation methods desigend for GWAS.
+Please do not hesitate to contact me (yuzhuoma@stu.pku.edu.cn) if you are interested in SPAmix or other retrospective saddlepoint approximation methods desigend for GWAS.
 
 # Introduction of Retrospective saddlepoint approximation (Retrospective SPA) approach in GWAS
 
@@ -30,4 +30,5 @@ have not yet been published  (**despite more than three years since retrospectiv
 
 Suggestions or comments on retrospective saddlepoint approximation methods are also welcome.
 
+# SPAmix can control for population admixture
 
