@@ -32,3 +32,14 @@ Suggestions or comments on retrospective saddlepoint approximation methods are a
 
 # SPAmix can control for population admixture
 
+
+# SPAmix+ is an extension of SPAmix
+In the SPAmix paper (**A scalable, accurate, and universal analysis framework using individual-level allele frequency for large-scale genetic association studies in an admixed population**), we proposed SPAmix framework that is applicable to admixed populations and can incorporate local ancestry information into analyses. However, SPAmix is only designed for unrelated individuals and cannot account for sample relatedness.
+
+**We are preparing the SPAmix+ paper (A scalable and accurate analysis framework accounting for sample relatedness and population structure for large-scale genetic association studies in an admixed population).** In this paper, we extend SPAmix to SPAmix+, a universal analysis framework that accounts for both population structure and sample relatedness. SPAmix+ allows for the incorporation of admixed individuals into analyses. In addition, SPAmix can be extended to SPAmix+(local), which has the ability to incorporates local ancestry.
+
+# The SPAmix paper and the SPAmix+ paper are two distinct papers
+
+**Please note that the SPAmix paper and the SPAmix+ paper are two distinct papers. Unfortunately, although the SPAmix algorithm was completed in 2021, its submission was delayed for some reasons. Consequently, the SPAmix+ algorithm will be presented in a separate paper rather than within the SPAmix paper.** 
+
+
