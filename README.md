@@ -6,7 +6,7 @@ A scalable, accurate, and universal analysis framework using individual-level al
   * [Software dependencies and operating systems](#Software-dependencies-and-operating-systems)
   * [How to install and load package](#How-to-install-and-load-package-for-SPAmix-analysis)
   * [Introduction of SPAmix](#Introduction-of-SPAmix)
-  * [How to conduct SPAmix analysis](#How-to-conduct-SPAmix-analysis-package)
+  * [How to conduct SPAmix analysis](#How-to-conduct-SPAmix-analysis)
   * [Reproducibility](#Reproducibility)
       * [UK Biobank data analysis](#UK-Biobank-data-analysis)
       * [Simulation studies](#Simulation-studies)
