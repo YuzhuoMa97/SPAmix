@@ -1,0 +1,122 @@
+# cd /gdata01/user/yuzhuoma/SPA-G/UKB/all_population/code/
+# sbatch --exclude=node04,node05,node06 -J EczCoxAll --mem=18000M -t 3-0:0 --array=1-2336 -o log/%A_%a.log --wrap='Rscript Phenotype_SPACox_allchr_step2.R $SLURM_ARRAY_TASK_ID'
+# sbatch -J ADCox --mem=7000M -t 3-0:0 --array=1-2336 -o log/%A_%a.log --wrap='Rscript Phenotype_SPACox_allchr_step2.R $SLURM_ARRAY_TASK_ID'
+
+args=commandArgs(TRUE)
+print(args)
+print(sessionInfo())
+n.cpu=as.numeric(args)  
+
+library(GRAB)
+library(data.table)
+library(SPACox)
+
+# updated on 2023-03-23: some variants sum(g.tilde)==0, thus MAF.est=0, and result in inflated type I error rates
+# read in SampleIDs
+load("/gdata01/user/yuzhuoma/SPA-G/UKB/all_population/data/SampleIDs_all.RData") # 338,041 SampleIDs_all
+
+# read in an object of "table"
+load("/gdata01/user/home/wenjianb/LA_PD/SPAGE_2022-06-23/version-1/before-step2-table.RData")
+
+# read in objNull from step 1
+# PheCode = "X290.11" 
+# PheCode = "X250.2" 
+# PheCode = "X401.1" 
+# PheCode = "X332" 
+# PheCode = "X282.5" 
+# PheCode = "X335" 
+# PheCode = "X365" 
+# PheCode = "X499" 
+# PheCode = "X495" 
+# PheCode = "X743.11" 
+# PheCode = "X295.1" 
+PheCode = "X931" 
+
+
+PhenoFile = list.files(paste0("/gdata01/user/yuzhuoma/SPA-G/UKB/all_population/working/",PheCode),pattern = ".csv")
+Phenotype = unlist(strsplit(PhenoFile, "_TTE.csv"))
+cat("PheCode:\t", PheCode, "\n")
+cat("PhenoFile:\t", PhenoFile, "\n")
+cat("Phenotype:\t", Phenotype, "\n")
+# Phenotype = "AD" , "Parkinson", "Type 2 diabetes” , "Glaucoma"
+# load("/gdata01/user/yuzhuoma/SPA-G/UKB/all_population/working/X290.11/objNull_SPAmix_All.RData")
+load(paste0("/gdata01/user/yuzhuoma/SPA-G/UKB/all_population/working/",PheCode, "/", "objNull_SPACox_All.RData"))
+
+# Seperate SNPs into several parts
+# n.cpu=1
+files = table$file[table$group==n.cpu]
+group = n.cpu
+dir.create(paste0("/gdata01/user/yuzhuoma/SPA-G/UKB/all_population/Results_All/", Phenotype, "/Results_SPACox"),recursive = T)
+file.output = paste0("/gdata01/user/yuzhuoma/SPA-G/UKB/all_population/Results_All/", Phenotype, "/Results_SPACox/results_",n.cpu,".csv")
+
+#### GWAS using SPACox
+output = c()
+
+for(IDsToIncludeFile in files) {
+  # IDsToIncludeFile = files[1]
+  IDsToIncludeFile = stringr::str_replace(IDsToIncludeFile, "/data1", "/gdata02/master_data1")
+  cat("IDsToIncludeFile:\t",IDsToIncludeFile,"\n")
+  chr = unlist(strsplit(IDsToIncludeFile, "chr_|_chunk"))[2]
+  chunk = unlist(strsplit(IDsToIncludeFile, "chr_|_chunk_|.txt"))[3]
+  chr_chunk = paste0("chr_",chr,"_chunk_",chunk)
+  
+  ##load in population data--------------------------------------------------------------
+  ##Genotype data
+  GenoFile = paste0("/gdata02/master_data1/UK_Biobank/ukb22828_imp/ukb22828_c",chr,"_b0_v3.bgen")
+  GenoFileIndex = c(paste0("/gdata02/master_data1/UK_Biobank/ukb22828_imp/ukb_imp_chr",chr,"_v3.bgen.bgi"),
+                    
+                    "/gdata02/master_data1/UK_Biobank/ukb22828_imp/ukb22828_c1_b0_v3_s487203.sample");
+  
+  # OutputFile = paste0("/gdata01/user/yuzhuoma/SPA-G/UKB/all_population/Results_All/", Phenotype, "/Results_SPAmix_SPAmixnoSPA/results_",n.cpu,".txt")
+  # OutputFile = paste0("/gdata01/user/yuzhuoma/SPA-G/UKB/all_population/Results_All/", Phenotype, "/Results_SPACox/results_",chr_chunk,".csv")
+  
+  cat("part1")
+  
+  GenoList_all = GRAB.ReadGeno(GenoFile = GenoFile,
+                               GenoFileIndex = GenoFileIndex,
+                               SampleIDs = SampleIDs_all,
+                               control = list(IDsToIncludeFile = IDsToIncludeFile,
+                                              AlleleOrder = "ref-first"))
+  
+  cat("part2")
+  
+  ##population with sample size = 338041, num of SNPs = 998
+  GenoMat_all = GenoList_all$GenoMat 
+  
+  rm(GenoList_all)
+  
+  cat("part3")
+  
+  gMat_all = GenoMat_all[,!duplicated(colnames(GenoMat_all))] %>% as.data.frame() %>%
+    mutate(gID = rownames(GenoMat_all[SampleIDs_all,]))%>%
+    arrange(gID) %>% select(-gID)
+  
+  rm(GenoMat_all)
+  
+  cat("part4")
+  
+  min.maf = 0.0001
+  
+  res.SPACox.all = SPACox(obj.null = objNull_SPACox_All, Geno.mtx = as.matrix(gMat_all),
+                          min.maf = min.maf) # min.maf = 0.001
+  
+  res.SPACox.all = res.SPACox.all %>% as.data.frame() %>%
+    rename(p.value.spacox.all = p.value.spa, p.value.norm.R.all = p.value.norm, Var.spacox.all = Var,
+           Stat.all = Stat, z.spacox.all = z, MAF.all = MAF, missing.rate.all = missing.rate) %>%
+    mutate(Marker = rownames(res.SPACox.all))
+  
+  rm(gMat_all)
+  
+  # fwrite(res.SPACox.all, OutputFile)
+  
+  output = rbind(output, res.SPACox.all)
+}
+
+output = as.data.frame(output)
+fwrite(output, file.output)
+
+# SampleIDs_all = intersect(rownames(GenoMat),as.character(PheData$Wenjian)) # 338,041
+# save(SampleIDs_all, file = "/gdata01/user/yuzhuoma/SPA-G/UKB/all_population/data/SampleIDs_all.RData")
+# 
+# SampleIDs_WB = intersect(rownames(GenoMat),as.character(PheData_WB$Wenjian)) # 281,296
+# save(SampleIDs_WB, file = "/gdata01/user/yuzhuoma/SPA-G/UKB/all_population/data/SampleIDs_WB.RData")
