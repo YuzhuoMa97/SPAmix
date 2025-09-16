@@ -67,3 +67,31 @@ Suggestions or comments on retrospective saddlepoint approximation methods are a
 
 In the SPAmix paper (**SPAmix: A scalable, accurate, and universal analysis framework for large-scale genetic association studies in admixed populations**), we proposed SPAmix framework that is applicable to admixed populations and can incorporate local ancestry information into analyses. 
 
+
+
+# Reproducibility
+
+Scripts to reproduce the experiments performed for the manuscript:
+
+ **SPAmix: A scalable, accurate, and universal analysis framework for large-scale genetic association studies in admixed populations**
+
+## UK Biobank data analysis 
+
+In the paper **SPAmix: A scalable, accurate, and universal analysis framework for large-scale genetic association studies in admixed populations**, we have applied SPAmix to analyze time-to-event and longitudinal traits in UK Biobank. 
+
+**Summary statistics of time-to-event and longitudinal traits in UK Biobank is available [here](https://zenodo.org/record/8343684).**
+
+## Simulation studies
+
+The primary codes used in the SPAmix project's simulation studies are available in the **simulation_studies** folder.
+
+
+
+
+# Reference
+See [**SPAmix: A scalable, accurate, and universal analysis framework for large-scale genetic association studies in admixed populations**] for more details about SPAmix.
+
+
+
+
+
