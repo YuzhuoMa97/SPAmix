@@ -47,13 +47,13 @@ library(GRAB)
 
 ## Introduction of SPAmix 
 
-### SPAGxE<sub>CCT</sub> is a scalable and accurate G×E analytical framework that accounts for unbalanced phenotypic distribution
+### SPAmix is designed for conducting GWASs in a study cohort including multiple subpopulations and/or admixed populations. 
 
-**SPAGxE<sub>CCT</sub> is applicable to a wide range of complex traits with intricate structures, including time-to-event, ordinal categorical, binary, quantitative, longitudinal, and other complex traits.** The framework involves two main steps:
+**SPAmix is applicable to a wide range of complex traits with intricate structures, including time-to-event, ordinal categorical, binary, quantitative, longitudinal, and other complex traits.** The framework involves two main steps:
 
-- Step 1: SPAGxE<sub>CCT</sub> fits a covariates-only model to calculate model residuals. These covariates include, but are not limited to, confounding factors such as age, sex, SNP-derived principal components (PCs), and environmental factors. The specifics of the model and residuals vary depending on the trait type. Since the covariates-only model is genotype-independent, it only needs to be fitted once across a genome-wide analysis.
+- Step 1: SPAmix requires fitting a null model to calculate model residuals, in which confounding factors such as age, sex, SNP-derived principal components (PCs), and other confounders are incorporated as covariates. The null model specification and the corresponding model residuals can vary depending on the type of trait. In the online Methods section, we demonstrated regression models to fit binary, quantitative, time-to-event, ordinal, and longitudinal traits, and the corresponding model residuals. 
 
-- Step 2: SPAGxE<sub>CCT</sub> identifies genetic variants with marginal G×E effects on the trait of interest. First, marginal genetic effects are tested using score statistics. If the marginal genetic effect is not significant, S<sub>G×E</sub> is used as the test statistic to characterize the marginal G×E effect. If significant, S<sub>G×E</sub> is updated to genotype-adjusted test statistics. To balance computational efficiency and accuracy, SPAGxE<sub>CCT</sub> employs a hybrid strategy combining normal distribution approximation and saddlepoint approximation (SPA) to calculate p-values, as used in previous studies such as [SAIGE](https://saigegit.github.io/SAIGE-doc/) and [SPAGE](https://github.com/WenjianBI/SPAGE). For variants with significant marginal genetic effects, SPAGxE<sub>CCT</sub> additionally calculates p value through Wald test and uses Cauchy combination (CCT) to combine p values from Wald test and the proposed genotype-adjusted test statistics.
+- Step 2: SPAmix approach associates the traits of interest to single genetic variant by approximating the null distribution of score statistics. To characterize the diversity of allele frequencies (AFs) of this genetic variant for different ancestries, we assume that individuals come from different populations with varying AF. Instead, linear and logistic regressions were used to estimate individual-specific AFs, in which raw genotypes are outcomes and SNP-derived principal components are model predictors. SPAmix uses a hybrid strategy including both normal distribution approximation and SPA to approximate the distribution of score statistics under the null hypothesis. In addition, model residuals are categorized to outliers and non-outliers based on interquartile range, and a partial normal distribution is used to reduce computational burden. SPAmix supports simultaneously analyzing multiple traits whose types are the same or different, which can avoid repeated calculation of the AFs estimation. 
 
 
 
@@ -65,5 +65,5 @@ Suggestions or comments on retrospective saddlepoint approximation methods are a
 
 # SPAmix can control for population admixture
 
-In the SPAmix paper (**A scalable, accurate, and universal analysis framework using individual-level allele frequency for large-scale genetic association studies in an admixed population**), we proposed SPAmix framework that is applicable to admixed populations and can incorporate local ancestry information into analyses. 
+In the SPAmix paper (**SPAmix: A scalable, accurate, and universal analysis framework for large-scale genetic association studies in admixed populations**), we proposed SPAmix framework that is applicable to admixed populations and can incorporate local ancestry information into analyses. 
 
