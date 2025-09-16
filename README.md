@@ -22,7 +22,7 @@ A scalable, accurate, and universal analysis framework using individual-level al
 ## How to install and load this package for SPAmix analysis
 ```
 # ========================================================================
-# SPAmix Analysis Pipeline for ALLofUS Database using GRAB Package
+# SPAmix Analysis Pipeline using GRAB Package
 # ========================================================================
 
 # -------------------------------------------
