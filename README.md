@@ -53,7 +53,9 @@ library(GRAB)
 
 - Step 1: SPAmix requires fitting a null model to calculate model residuals, in which confounding factors such as age, sex, SNP-derived principal components (PCs), and other confounders are incorporated as covariates. The null model specification and the corresponding model residuals can vary depending on the type of trait. In the online Methods section, we demonstrated regression models to fit binary, quantitative, time-to-event, ordinal, and longitudinal traits, and the corresponding model residuals. 
 
-- Step 2: SPAmix approach associates the traits of interest to single genetic variant by approximating the null distribution of score statistics. To characterize the diversity of allele frequencies (AFs) of this genetic variant for different ancestries, we assume that individuals come from different populations with varying AF. Instead, linear and logistic regressions were used to estimate individual-specific AFs, in which raw genotypes are outcomes and SNP-derived principal components are model predictors. SPAmix uses a hybrid strategy including both normal distribution approximation and SPA to approximate the distribution of score statistics under the null hypothesis. In addition, model residuals are categorized to outliers and non-outliers based on interquartile range, and a partial normal distribution is used to reduce computational burden. SPAmix supports simultaneously analyzing multiple traits whose types are the same or different, which can avoid repeated calculation of the AFs estimation. 
+- Step 2: SPAmix approach associates the traits of interest to single genetic variant by approximating the null distribution of score statistics. To characterize the diversity of allele frequencies (AFs) of this genetic variant for different ancestries, we assume that individuals come from different populations with varying AF. Instead, linear and logistic regressions were used to estimate individual-specific AFs, in which raw genotypes are outcomes and SNP-derived principal components are model predictors. SPAmix uses a hybrid strategy including both normal distribution approximation and SPA to approximate the distribution of score statistics under the null hypothesis. In addition, model residuals are categorized to outliers and non-outliers based on interquartile range, and a partial normal distribution is used to reduce computational burden. SPAmix supports simultaneously analyzing multiple traits whose types are the same or different, which can avoid repeated calculation of the AFs estimation.
+
+![plot](https://github.com/YuzhuoMa97/SPAGxECCT/blob/main/workflow/workflow_SPAGxEmixCCT_MYZ.png)
 
 ## How to conduct SPAmix analysis
 ```
@@ -235,7 +237,7 @@ The primary codes used in the SPAmix project's simulation studies are available 
 
 
 # Reference
-See [**SPAmix: A scalable, accurate, and universal analysis framework for large-scale genetic association studies in admixed populations**] for more details about SPAmix.
+See **SPAmix: A scalable, accurate, and universal analysis framework for large-scale genetic association studies in admixed populations** for more details about SPAmix.
 
 
 
