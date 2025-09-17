@@ -17,8 +17,6 @@ A scalable, accurate, and universal analysis framework using individual-level al
 
 - SPAmix has been implemented in GRAB package. The package has been thoroughly examined and validated on both Linux and Windows operating systems.
 
-- Currently, this R package supports three formats for genotype input: the R matrix (Rdata) format, the [**PLINK**](https://www.cog-genomics.org/plink2/) format, and the [**BGEN**](https://www.chg.ox.ac.uk/~gav/bgen_format/index.html) format.
-
 ## How to install and load package for SPAmix analysis
 ```
 # ========================================================================
