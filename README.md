@@ -19,7 +19,7 @@ A scalable, accurate, and universal analysis framework using individual-level al
 
 - Currently, this R package supports three formats for genotype input: the R matrix (Rdata) format, the [**PLINK**](https://www.cog-genomics.org/plink2/) format, and the [**BGEN**](https://www.chg.ox.ac.uk/~gav/bgen_format/index.html) format.
 
-## How to install and load this package for SPAmix analysis
+## How to install and load package for SPAmix analysis
 ```
 # ========================================================================
 # SPAmix Analysis Pipeline using GRAB Package
