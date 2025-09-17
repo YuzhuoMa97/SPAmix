@@ -229,7 +229,7 @@ In the paper **SPAmix: A scalable, accurate, and universal analysis framework fo
 
 ## Simulation studies
 
-The primary codes used in the SPAmix project's simulation studies are available in the **simulation_studies** folder.
+The primary codes used in the SPAmix project's simulation studies are available in the **code/simulation_studies** folder.
 
 
 
