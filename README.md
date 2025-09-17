@@ -15,7 +15,7 @@ A scalable, accurate, and universal analysis framework using individual-level al
 
 ## Software dependencies and operating systems
 
-- SPAmix has been implemented in GRAB package. The package has been thoroughly examined and validated on both Linux and Windows operating systems.
+- SPAmix has been implemented in [GRAB](https://wenjianbi.github.io/grab.github.io/) package. The package has been thoroughly examined and validated on both Linux and Windows operating systems.
 
 ## How to install and load package for SPAmix analysis
 ```
