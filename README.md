@@ -41,7 +41,7 @@ library(GRAB)
 
 - Please refer to the [GRAB documentation](https://wenjianbi.github.io/grab.github.io/docs/approach_SPACox.html) for more details on how to conduct GWAS using this package.
 
-- Please do not hesitate to contact yuzhuoma@stu.pku.edu.cn or wenjianb@pku.edu.cn if you meet any problem. Suggestions or comments are also welcome.
+- Please do not hesitate to contact yuzhuoma@stu.pku.edu.cn or yuzhuoma@amss.ac.cn if you meet any problem. Suggestions or comments are also welcome.
 
 ## Introduction of SPAmix 
 
